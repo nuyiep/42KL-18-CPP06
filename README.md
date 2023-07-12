@@ -2,7 +2,7 @@
 
 This module is designed to help you understand the different casts in CPP.
 
-**Static cast**
+***Static cast***
 
 	- implicit type conversion
 	- static memory allocation is done before the program is executed
@@ -14,7 +14,7 @@ This module is designed to help you understand the different casts in CPP.
 		Base* basePtr = new Derived();
 		Derived* derivedPtr = static_cast<Derived*>(basePtr); //pointer conversion
 
-Reinterpret cast
+***Reinterpret cast***
 
 	- low-level type conversions between unrelated types
 	- E.g. converting a pointer to an integer type or vice versa
@@ -25,7 +25,7 @@ Reinterpret cast
 		char* charPtr = reinterpret_cast<char*>(&num); //pointer to integer conversion
 		int* intPtr = reinterpret_cast<int*>(charPtr); // pointer type conversion
 
-Dynamic cast 
+***Dynamic cast***
 
 	- safe type conversions in polymorphic class hierarchies
 	  with runtime type checking
