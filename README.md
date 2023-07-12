@@ -2,7 +2,7 @@
 
 This module is designed to help you understand the different casts in CPP.
 
-Static cast
+**Static cast**
 
 	- implicit type conversion
 	- static memory allocation is done before the program is executed
