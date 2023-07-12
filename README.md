@@ -15,6 +15,7 @@ Static cast
 		Derived* derivedPtr = static_cast<Derived*>(basePtr); //pointer conversion
 
 Reinterpret cast
+
 	- low-level type conversions between unrelated types
 	- E.g. converting a pointer to an integer type or vice versa
 	- often not recommended to use it unless you have a very specific need
@@ -25,6 +26,7 @@ Reinterpret cast
 		int* intPtr = reinterpret_cast<int*>(charPtr); // pointer type conversion
 
 Dynamic cast 
+
 	- safe type conversions in polymorphic class hierarchies
 	  with runtime type checking
 	- dynamic memory allocation is done during run-time
