@@ -6,32 +6,22 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 13:53:28 by plau              #+#    #+#             */
-/*   Updated: 2023/07/12 21:09:57 by plau             ###   ########.fr       */
+/*   Updated: 2023/07/13 20:56:31 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#include "scalar.hpp"
 
-int main()
+int main(int ac, char **av)
 {
-	class Base
+	if (ac != 2)
 	{
-		public:
-			virtual void foo() {}
-	};
-	class Derived : public Base {};
-
-	Base* basePtr = new Derived();
-	Derived* derivedPtr = dynamic_cast<Derived*>(basePtr); //downcasting
-
-	if (derivedPtr != 0)
-	{
-		//cast was successful
-		std::cout << "Cast successful." << std::endl;
-		derivedPtr->foo();
+		std::cout << "Invalid number of inputs" << std::endl;
+		return (2);
 	}
-	else
-	{
-		std::cout << "Cast failed." << std::endl;
-	}
+	ScalarConverter A;
+
+	A.convert(av[1]);
+	
+	return (0);
 }
