@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 12:47:32 by plau              #+#    #+#             */
-/*   Updated: 2023/07/13 20:55:53 by plau             ###   ########.fr       */
+/*   Updated: 2023/07/13 21:07:13 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,22 @@ bool	ScalarConverter::isInt(std::string input)
 
 void	ScalarConverter::convert(std::string input)
 {
+	if (input[0] == '0')
+	{
+		std::cout << "char: Non displayable" << std::endl;
+		std::cout << "int: " << input[0] << std::endl;
+		std::cout << "float: " << input[0] << ".0f" << std::endl;
+		std::cout << "double: " << input[0] << ".0" << std::endl;
+		exit(3);
+	}
+	if (input.compare("nan") == 0)
+	{
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: nanf" << std::endl;
+		std::cout << "double: nan" << std::endl;
+		exit(4);
+	}
 	if (isChar(input) == true)
 	{
 		std::cout << "char: " << input << std::endl;
