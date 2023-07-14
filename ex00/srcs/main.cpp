@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 13:53:28 by plau              #+#    #+#             */
-/*   Updated: 2023/07/13 20:56:31 by plau             ###   ########.fr       */
+/*   Updated: 2023/07/14 14:58:34 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,15 @@ int main(int ac, char **av)
 		std::cout << "Invalid number of inputs" << std::endl;
 		return (2);
 	}
-	ScalarConverter A;
+	try
+	{
+		ScalarConverter A;
 
-	A.convert(av[1]);
-	
+		A.convert(av[1]);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 12:47:28 by plau              #+#    #+#             */
-/*   Updated: 2023/07/13 20:55:51 by plau             ###   ########.fr       */
+/*   Updated: 2023/07/14 17:56:30 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <string>
 #include <iostream>
+#include <iomanip>
 
 class ScalarConverter
 {
@@ -30,7 +31,13 @@ class ScalarConverter
 
 		/* Member function */
 		bool		isChar(std::string input);
+		bool		isDouble(std::string input);
+		bool		isFloat(std::string input);
 		bool		isInt(std::string input);
+		int			charToInt(std::string input);
+		float		charToFloat(std::string input);
+		double		charToDouble(std::string input);
+		
 		
 	private :
 		
