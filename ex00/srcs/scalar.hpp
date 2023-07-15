@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 12:47:28 by plau              #+#    #+#             */
-/*   Updated: 2023/07/14 17:56:30 by plau             ###   ########.fr       */
+/*   Updated: 2023/07/16 00:00:28 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ class ScalarConverter
 		int			charToInt(std::string input);
 		float		charToFloat(std::string input);
 		double		charToDouble(std::string input);
+		std::string		floatToChar(std::string input);
+		int				floatToInt(std::string input);
+		float			strToFloat(std::string input);
 		
 		
 	private :

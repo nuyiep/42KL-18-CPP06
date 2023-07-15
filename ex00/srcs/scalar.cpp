@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 12:47:32 by plau              #+#    #+#             */
-/*   Updated: 2023/07/14 18:57:08 by plau             ###   ########.fr       */
+/*   Updated: 2023/07/16 00:34:59 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,48 +31,7 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &src)
 	return (*this);
 }
 
-bool	ScalarConverter::isChar(std::string input)
-{
-	if (input.size() == 1 && !isdigit(input[0]))
-		return (true);
-	else
-		return (false);
-}
 
-bool	ScalarConverter::isDouble(std::string input)
-{
-	try
-	{
-		std::stod(input);
-		return true;
-	}
-	catch(const std::exception& e)
-	{
-		return false;
-	}
-}
-
-bool	ScalarConverter::isFloat(std::string input)
-{
-	if (std::stof(input) && input[input.length() - 1] == 'f')
-		return (true);
-	else
-		return (false);
-}
-
-bool	ScalarConverter::isInt(std::string input)
-{
-	int		i;
-
-	i = 0;
-	while (input[i] != '\0')
-	{
-		if (!isdigit(input[i]))
-			return (false);
-		i++;
-	}
-	return (true);
-}
 
 /* first scenario: char c to int */
 /* convert to ascii value */
@@ -105,6 +64,47 @@ double	ScalarConverter::charToDouble(std::string input)
 	return (x);
 }
 
+/* Convert to int then to char */
+ std::string ScalarConverter::floatToChar(std::string input)
+ {
+	int			y;
+	std::string x;
+	
+	y = 0;
+	y = std::stoi(input);
+	x = static_cast<char>(y);
+	return (x);
+ }
+
+ int	ScalarConverter::floatToInt(std::string input)
+ {
+	int		x;
+
+	x = 0;
+	x = std::stoi(input);
+	return (x);
+ }
+
+/* Convert to double first */ 
+float	ScalarConverter::strToFloat(std::string input)
+{
+	float	x;
+
+	x = 0;
+	if (input.back() == 'f')
+	{
+		input.pop_back(); // remove the f char
+		if (input.find('.') == std::string::npos) // if not found will return std::string::npos
+		{
+			x = std::stof(input) + 0.0;
+			std::cout << "here: " << x << std::endl;
+			return (x);
+		}
+	}
+	// x = std::stof(input);
+	return (x);
+}
+
 /* std::fixed - ensures that the float value is printed with */
 /* 				fixed-point notation */
 void	ScalarConverter::convert(std::string input)
@@ -127,7 +127,7 @@ void	ScalarConverter::convert(std::string input)
 	// }
 	if (isChar(input) == true)
 	{
-		std::cout << "char: " << input << std::endl;
+		std::cout << "char: '" << input << "'"<< std::endl;
 		std::cout << "int: " << charToInt(input) << std::endl;
 		std::cout << "float: " << std::fixed << std::setprecision(1) << charToFloat(input) << "f"<< std::endl;
 		std::cout << "double: " << std::fixed << std::setprecision(1) << charToDouble(input) << std::endl;
@@ -136,6 +136,10 @@ void	ScalarConverter::convert(std::string input)
 	if (isFloat(input) == true)
 	{
 		std::cout << "is a float" << std::endl;
+		std::cout << "char: '" << floatToChar(input) << "'"<< std::endl;
+		std::cout << "int: " << floatToInt(input) << std::endl;
+		std::cout << "float: " << std::fixed << strToFloat(input) << "f"<< std::endl;
+		// std::cout << "double: " << std::fixed << std::setprecision(1) << charToDouble(input) << std::endl;
 		exit (7);	
 	}
 	if (isDouble(input) == true)
@@ -147,5 +151,6 @@ void	ScalarConverter::convert(std::string input)
 	{
 		
 	}
+	std::cout << "are u here" << std::endl;
 	throw std::runtime_error("cannot be converted");
 }
