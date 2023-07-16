@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 12:47:32 by plau              #+#    #+#             */
-/*   Updated: 2023/07/16 00:34:59 by plau             ###   ########.fr       */
+/*   Updated: 2023/07/16 11:02:47 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,13 @@ double	ScalarConverter::charToDouble(std::string input)
 	
 	y = 0;
 	y = std::stoi(input);
+	if ((0 <= y && y <= 31) || y == 127)
+	{
+		std::cout << "char: non-printable characters" << std::endl;
+		return (NULL);
+	}
 	x = static_cast<char>(y);
+	std::cout << "char: '" << floatToChar(input) << "'"<< std::endl;
 	return (x);
  }
 
@@ -88,20 +94,33 @@ double	ScalarConverter::charToDouble(std::string input)
 /* Convert to double first */ 
 float	ScalarConverter::strToFloat(std::string input)
 {
-	float	x;
+	double	x;
+	int		precision;
 
 	x = 0;
-	if (input.back() == 'f')
+	x = std::stod(input);
+	precision = 0;
+	if (input.find('.') != std::string::npos) // if not found will return npos
 	{
-		input.pop_back(); // remove the f char
-		if (input.find('.') == std::string::npos) // if not found will return std::string::npos
-		{
-			x = std::stof(input) + 0.0;
-			std::cout << "here: " << x << std::endl;
-			return (x);
-		}
+		precision = input.find('.');
+		// precision = input.length() - input.find('.') - 1;
+		std::cout << "precision: " << precision << std::endl;
 	}
+	
+	// std::cout << "double: " << std::fixed << std::setprecision() << y << std::endl;
+	// std::cout << "double: " << std::fixed << std::setprecision(1) << charToDouble(input) << std::endl;
+	// if (input.back() == 'f')
+	// {
+	// 	input.pop_back(); // remove the f char
+	// 	if (input.find('.') == std::string::npos) // if not found will return std::string::npos
+	// 	{
+	// 		x = std::stof(input) + 0.0;
+	// 		std::cout << "here: " << x << std::endl;
+	// 		return (x);
+	// 	}
+	// }
 	// x = std::stof(input);
+	// std::cout << "float: " << std::fixed << strToFloat(input) << "f"<< std::endl;
 	return (x);
 }
 
@@ -136,9 +155,9 @@ void	ScalarConverter::convert(std::string input)
 	if (isFloat(input) == true)
 	{
 		std::cout << "is a float" << std::endl;
-		std::cout << "char: '" << floatToChar(input) << "'"<< std::endl;
+		// floatToChar(input);
 		std::cout << "int: " << floatToInt(input) << std::endl;
-		std::cout << "float: " << std::fixed << strToFloat(input) << "f"<< std::endl;
+		strToFloat(input);
 		// std::cout << "double: " << std::fixed << std::setprecision(1) << charToDouble(input) << std::endl;
 		exit (7);	
 	}

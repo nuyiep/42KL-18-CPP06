@@ -59,5 +59,5 @@ This module is designed to help you understand the different casts in CPP.
 	- nanf not a number- undefined or indeterminate operation
 		(e.g. square root of a negative number)
 
-**Conversion**
-
+**Non-printable character in ASCII**
+	- 0 to 31 and 127 are non-printable characters
