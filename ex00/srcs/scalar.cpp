@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 12:47:32 by plau              #+#    #+#             */
-/*   Updated: 2023/07/17 10:53:35 by plau             ###   ########.fr       */
+/*   Updated: 2023/07/17 11:46:18 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ double	ScalarConverter::charToDouble(std::string input)
 }
 
 /* Convert to int then to char */
-void ScalarConverter::floatToChar(std::string input)
+void ScalarConverter::floatOrDoubleOrIntToChar(std::string input)
  {
 	int			y;
 	std::string x;
@@ -86,13 +86,21 @@ void ScalarConverter::floatToChar(std::string input)
 	std::cout << "char: non-displayable" << std::endl;
  }
 
- int	ScalarConverter::floatToInt(std::string input)
+ int	ScalarConverter::floatOrDoubleToInt(std::string input)
  {
 	int		x;
 
 	x = 0;
-	x = std::stoi(input);
-	return (x);
+	try
+	{
+		x = std::stoi(input);
+		return (x);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << "Cannot be converted" << '\n';
+		exit(EXIT_FAILURE);
+	}
  }
 
 /* Convert to double first */ 
@@ -100,7 +108,7 @@ void ScalarConverter::floatToChar(std::string input)
 /* std::string::npos - constant static member of std::string class */
 /* 					 - represents the max value for a size_t (unsigned int) */
 /* 					 - used to indicate that a value of pos is not found */
-void	ScalarConverter::floatToFloatandDouble(std::string input)
+void	ScalarConverter::floatOrDoubleToFloatandDouble(std::string input)
 {
 	double	x;
 	int		precision;
@@ -165,20 +173,27 @@ void	ScalarConverter::convert(std::string input)
 	if (isFloat(input) == true)
 	{
 		std::cout << "is a float" << std::endl;
-		floatToChar(input);
-		std::cout << "int: " << floatToInt(input) << std::endl;
-		floatToFloatandDouble(input);
+		floatOrDoubleOrIntToChar(input);
+		std::cout << "int: " << floatOrDoubleToInt(input) << std::endl;
+		floatOrDoubleToFloatandDouble(input);
 		exit (7);	
 	}
 	if (isDouble(input) == true)
 	{
 		std::cout << "is a double" << std::endl;
+		floatOrDoubleOrIntToChar(input);
+		std::cout << "int: " << floatOrDoubleToInt(input) << std::endl;
+		floatOrDoubleToFloatandDouble(input);
 		exit(6);
 	}
 	if (isInt(input) == true)
 	{
-		
+		std::cout << "is int" << std::endl;
+		floatOrDoubleOrIntToChar(input);
+		std::cout << "int: " << input << std::endl;
+		floatOrDoubleToFloatandDouble(input);
+		exit(8);
 	}
-	std::cout << "are u here" << std::endl;
+	std::cout << "u here?" << std::endl;
 	throw std::runtime_error("cannot be converted");
 }
