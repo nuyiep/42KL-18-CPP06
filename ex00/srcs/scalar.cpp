@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 12:47:32 by plau              #+#    #+#             */
-/*   Updated: 2023/07/17 14:06:46 by plau             ###   ########.fr       */
+/*   Updated: 2023/07/17 14:11:59 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,5 +206,6 @@ void	ScalarConverter::convert(std::string input)
 		floatOrDoubleToFloatandDouble(input);
 		exit(8);
 	}
-	throw std::runtime_error("Cannot be converted");
+	
+	throw std::runtime_error("Throwing: Cannot be converted");
 }
