@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 12:47:32 by plau              #+#    #+#             */
-/*   Updated: 2023/07/17 11:48:51 by plau             ###   ########.fr       */
+/*   Updated: 2023/07/17 14:06:46 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,6 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &src)
 	return (*this);
 }
 
-
-
-/* first scenario: char c to int */
 /* convert to ascii value */
 int		ScalarConverter::charToInt(std::string input)
 {
@@ -71,35 +68,57 @@ void ScalarConverter::floatOrDoubleOrIntToChar(std::string input)
 	std::string x;
 	
 	y = 0;
-	y = std::stoi(input);
-	if ((0 <= y && y <= 31) || y == 127)
+	try
 	{
-		std::cout << "char: Non displayable" << std::endl;
+		if (input == "-inff" || input == "+inff" || input == "nanf" ||
+			input == "-inf" || input == "+inf" || input == "nan")
+		{
+			std::cout << "char: Impossible" << std::endl;
+			return ;
+		}
+		y = std::stoi(input);
+		if ((0 <= y && y <= 31) || y == 127)
+		{
+			std::cout << "char: Non displayable" << std::endl;
+			return ;
+		}
+		if (y >= 32 && y <= 126)
+		{
+			x = static_cast<char>(y);
+			std::cout << "char: '" << x << "'"<< std::endl;
+			return ;
+		}
+		std::cout << "char: Non displayable"<< std::endl;
 		return ;
 	}
-	if (y >= 32 && y <= 126)
+	catch(const std::exception& e)
 	{
-		x = static_cast<char>(y);
-		std::cout << "char: '" << x << "'"<< std::endl;
-		return ;
+		std::cerr << "Cannot be converted" << '\n';
+		exit(10);
 	}
-	std::cout << "char: Non displayable" << std::endl;
  }
 
- int	ScalarConverter::floatOrDoubleToInt(std::string input)
+ void	ScalarConverter::floatOrDoubleToInt(std::string input)
  {
 	int		x;
 
 	x = 0;
 	try
 	{
+		if (input == "-inff" || input == "+inff"      || input == "nanf" ||
+			input == "-inf" || input == "+inf" || input == "nan")
+		{
+			std::cout << "int: Impossible" << std::endl;
+			return ;
+		}
 		x = std::stoi(input);
-		return (x);
+		std::cout << "int: " << x << std::endl;
+		return ;
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << "Cannot be converted" << '\n';
-		exit(EXIT_FAILURE);
+		exit(88);
 	}
  }
 
@@ -156,6 +175,7 @@ void	ScalarConverter::convert(std::string input)
 	}
 	if (isChar(input) == true)
 	{
+		std::cout << "is a char" << std::endl;
 		std::cout << "char: '" << input << "'"<< std::endl;
 		std::cout << "int: " << charToInt(input) << std::endl;
 		std::cout << "float: " << std::fixed << std::setprecision(1) << charToFloat(input) << "f"<< std::endl;
@@ -166,7 +186,7 @@ void	ScalarConverter::convert(std::string input)
 	{
 		std::cout << "is a float" << std::endl;
 		floatOrDoubleOrIntToChar(input);
-		std::cout << "int: " << floatOrDoubleToInt(input) << std::endl;
+		floatOrDoubleToInt(input);
 		floatOrDoubleToFloatandDouble(input);
 		exit (7);	
 	}
@@ -174,7 +194,7 @@ void	ScalarConverter::convert(std::string input)
 	{
 		std::cout << "is a double" << std::endl;
 		floatOrDoubleOrIntToChar(input);
-		std::cout << "int: " << floatOrDoubleToInt(input) << std::endl;
+		floatOrDoubleToInt(input);
 		floatOrDoubleToFloatandDouble(input);
 		exit(6);
 	}
@@ -186,6 +206,5 @@ void	ScalarConverter::convert(std::string input)
 		floatOrDoubleToFloatandDouble(input);
 		exit(8);
 	}
-	std::cout << "u here?" << std::endl;
-	throw std::runtime_error("cannot be converted");
+	throw std::runtime_error("Cannot be converted");
 }

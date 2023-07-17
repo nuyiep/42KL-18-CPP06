@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 22:46:46 by plau              #+#    #+#             */
-/*   Updated: 2023/07/17 12:05:48 by plau             ###   ########.fr       */
+/*   Updated: 2023/07/17 14:01:23 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ bool	ScalarConverter::isFloat(std::string input)
 {
 	try
 	{
+		if (input == "-inff" || input == "+inff" || input == "nanf")
+			return (true);
 		if (std::stof(input) && input[input.length() - 1] == 'f')
 			return (true);
 		else
@@ -55,7 +57,7 @@ bool	ScalarConverter::isFloat(std::string input)
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << "Cannot be converted [float]" << '\n';
+		std::cerr << "Cannot be converted" << '\n';
 		exit(EXIT_FAILURE);
 	}
 }
@@ -69,7 +71,7 @@ bool	ScalarConverter::isInt(std::string input)
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << "Cannot be converted[int]" << '\n';
+		std::cerr << "Cannot be converted" << '\n';
 		exit(EXIT_FAILURE);
 	}
 	return (false);
