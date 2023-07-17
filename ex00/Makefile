@@ -6,11 +6,11 @@
 #    By: plau <plau@student.42.kl>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 15:33:58 by plau              #+#    #+#              #
-#    Updated: 2023/07/15 22:48:04 by plau             ###   ########.fr        #
+#    Updated: 2023/07/17 10:22:44 by plau             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= 	scalar
+NAME			= 	convert
 CXX				= 	c++
 RM				= 	rm -rf
 MKDIR			= 	mkdir -p
