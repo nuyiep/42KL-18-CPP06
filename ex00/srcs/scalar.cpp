@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 12:47:32 by plau              #+#    #+#             */
-/*   Updated: 2023/07/17 11:46:18 by plau             ###   ########.fr       */
+/*   Updated: 2023/07/17 11:48:51 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void ScalarConverter::floatOrDoubleOrIntToChar(std::string input)
 	y = std::stoi(input);
 	if ((0 <= y && y <= 31) || y == 127)
 	{
-		std::cout << "char: non-printable characters" << std::endl;
+		std::cout << "char: Non displayable" << std::endl;
 		return ;
 	}
 	if (y >= 32 && y <= 126)
@@ -83,7 +83,7 @@ void ScalarConverter::floatOrDoubleOrIntToChar(std::string input)
 		std::cout << "char: '" << x << "'"<< std::endl;
 		return ;
 	}
-	std::cout << "char: non-displayable" << std::endl;
+	std::cout << "char: Non displayable" << std::endl;
  }
 
  int	ScalarConverter::floatOrDoubleToInt(std::string input)
@@ -146,22 +146,14 @@ void	ScalarConverter::floatOrDoubleToFloatandDouble(std::string input)
 /* 				fixed-point notation */
 void	ScalarConverter::convert(std::string input)
 {
-	// if (input[0] == '0')
-	// {
-	// 	std::cout << "char: Non displayable" << std::endl;
-	// 	std::cout << "int: " << input[0] << std::endl;
-	// 	std::cout << "float: " << input[0] << ".0f" << std::endl;
-	// 	std::cout << "double: " << input[0] << ".0" << std::endl;
-	// 	exit(3);
-	// }
-	// if (input.compare("nan") == 0)
-	// {
-	// 	std::cout << "char: impossible" << std::endl;
-	// 	std::cout << "int: impossible" << std::endl;
-	// 	std::cout << "float: nanf" << std::endl;
-	// 	std::cout << "double: nan" << std::endl;
-	// 	exit(4);
-	// }
+	if (input.compare("nan") == 0)
+	{
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: nanf" << std::endl;
+		std::cout << "double: nan" << std::endl;
+		exit(4);
+	}
 	if (isChar(input) == true)
 	{
 		std::cout << "char: '" << input << "'"<< std::endl;
