@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 22:46:46 by plau              #+#    #+#             */
-/*   Updated: 2023/07/17 11:34:17 by plau             ###   ########.fr       */
+/*   Updated: 2023/07/17 12:05:48 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,23 +55,22 @@ bool	ScalarConverter::isFloat(std::string input)
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << "cannot be converted" << '\n';
+		std::cerr << "Cannot be converted [float]" << '\n';
 		exit(EXIT_FAILURE);
 	}
 }
 
 bool	ScalarConverter::isInt(std::string input)
 {
-	int		i;
-
-	i = 0;
-	while (input[i] != '\0')
+	try
 	{
-		if (!isdigit(input[i]))
-			return (false);
-		i++;
+		if(std::stoi(input))
+		return (true);
 	}
-	return (true);
+	catch(const std::exception& e)
+	{
+		std::cerr << "Cannot be converted[int]" << '\n';
+		exit(EXIT_FAILURE);
+	}
+	return (false);
 }
-
-
