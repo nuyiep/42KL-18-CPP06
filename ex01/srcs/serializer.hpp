@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 15:00:28 by plau              #+#    #+#             */
-/*   Updated: 2023/07/17 19:14:17 by plau             ###   ########.fr       */
+/*   Updated: 2023/07/17 19:53:30 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,7 @@
 #include <string>
 #include <iostream>
 #include "color.hpp"
-
-struct Data
-{
-	std::string intraID;
-	int			batchYear;
-	bool		fun;
-	char		grade;
-};
+#include "data.hpp"
 
 class Serializer
 {
