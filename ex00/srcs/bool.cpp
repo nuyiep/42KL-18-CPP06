@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 22:46:46 by plau              #+#    #+#             */
-/*   Updated: 2023/07/17 14:24:46 by plau             ###   ########.fr       */
+/*   Updated: 2023/07/19 19:28:26 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ bool	ScalarConverter::isDouble(std::string input)
 	}
 	if (countDots != 1)
 		return (false);
+	i = 0;
 	while (input[i] != '\0')
 	{
 		if (!isdigit(input[i] || input[i] != '.'))
@@ -44,22 +45,17 @@ bool	ScalarConverter::isDouble(std::string input)
 	return (true);
 }
 
+/* stof doesnt throw exception */
+/* it returns "NaN" - which is covered by the else statement */
+/* as false */
 bool	ScalarConverter::isFloat(std::string input)
 {
-	try
-	{
-		if (input == "-inff" || input == "+inff" || input == "nanf")
-			return (true);
-		if (std::stof(input) && input[input.length() - 1] == 'f')
-			return (true);
-		else
-			return (false);
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << "Cannot be converted" << '\n';
-		exit(EXIT_FAILURE);
-	}
+	if (input == "-inff" || input == "+inff" || input == "nanf")
+		return (true);
+	if (std::stof(input) && input[input.length() - 1] == 'f')
+		return (true);
+	else
+		return (false);
 }
 
 /* stoi - if the conversion is successful, the function */
@@ -67,6 +63,15 @@ bool	ScalarConverter::isFloat(std::string input)
 /* 		- else will throw an exception */
 bool	ScalarConverter::isInt(std::string input)
 {
+	int	i;
+
+	i = 0;
+	while (input[i] != '\0')
+	{
+		if (!isdigit(input[i]))
+			return (false);
+		i++;
+	}
 	try
 	{
 		if(std::stoi(input) || input == "0")
@@ -74,7 +79,7 @@ bool	ScalarConverter::isInt(std::string input)
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << "Cannot be converted" << '\n';
+		std::cerr << "[isInt] Cannot be converted" << '\n';
 		exit(EXIT_FAILURE);
 	}
 	return (false);

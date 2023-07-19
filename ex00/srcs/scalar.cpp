@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 12:47:32 by plau              #+#    #+#             */
-/*   Updated: 2023/07/17 14:11:59 by plau             ###   ########.fr       */
+/*   Updated: 2023/07/19 19:28:59 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,21 +61,23 @@ double	ScalarConverter::charToDouble(std::string input)
 	return (x);
 }
 
-/* Convert to int then to char */
+/* Convert from string to int */
+/* then convert int to char */
+/* stoi conversion fails will throw exception */
 void ScalarConverter::floatOrDoubleOrIntToChar(std::string input)
  {
 	int			y;
 	std::string x;
 	
+	if (input == "-inff" || input == "+inff" || input == "nanf" ||
+		input == "-inf" || input == "+inf" || input == "nan")
+	{
+		std::cout << "char: Impossible" << std::endl;
+		return ;
+	}
 	y = 0;
 	try
 	{
-		if (input == "-inff" || input == "+inff" || input == "nanf" ||
-			input == "-inf" || input == "+inf" || input == "nan")
-		{
-			std::cout << "char: Impossible" << std::endl;
-			return ;
-		}
 		y = std::stoi(input);
 		if ((0 <= y && y <= 31) || y == 127)
 		{
@@ -93,7 +95,7 @@ void ScalarConverter::floatOrDoubleOrIntToChar(std::string input)
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << "Cannot be converted" << '\n';
+		std::cerr << "[Float-char] Cannot be converted" << '\n';
 		exit(10);
 	}
  }
@@ -105,7 +107,7 @@ void ScalarConverter::floatOrDoubleOrIntToChar(std::string input)
 	x = 0;
 	try
 	{
-		if (input == "-inff" || input == "+inff"      || input == "nanf" ||
+		if (input == "-inff" || input == "+inff" || input == "nanf" ||
 			input == "-inf" || input == "+inf" || input == "nan")
 		{
 			std::cout << "int: Impossible" << std::endl;
@@ -135,7 +137,14 @@ void	ScalarConverter::floatOrDoubleToFloatandDouble(std::string input)
 	int		length;
 
 	x = 0;
-	x = std::stod(input);
+	try
+	{
+		x = std::stod(input);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 	precision = 0;
 	dotPos = 0;
 	length = 0;
@@ -206,6 +215,5 @@ void	ScalarConverter::convert(std::string input)
 		floatOrDoubleToFloatandDouble(input);
 		exit(8);
 	}
-	
-	throw std::runtime_error("Throwing: Cannot be converted");
+	throw std::runtime_error("Throw: Cannot be converted");
 }
