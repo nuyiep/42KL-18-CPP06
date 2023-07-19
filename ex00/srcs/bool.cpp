@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 22:46:46 by plau              #+#    #+#             */
-/*   Updated: 2023/07/19 19:28:26 by plau             ###   ########.fr       */
+/*   Updated: 2023/07/19 21:52:12 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,24 +38,42 @@ bool	ScalarConverter::isDouble(std::string input)
 	i = 0;
 	while (input[i] != '\0')
 	{
-		if (!isdigit(input[i] || input[i] != '.'))
+		if (!isdigit(input[i]) && input[i] != '.' && input[i] != '+' && input[i] != '-')
 			return (false);
 		i++;
 	}
 	return (true);
 }
 
-/* stof doesnt throw exception */
-/* it returns "NaN" - which is covered by the else statement */
-/* as false */
+/* can also use string::find - shorter code */
 bool	ScalarConverter::isFloat(std::string input)
 {
 	if (input == "-inff" || input == "+inff" || input == "nanf")
 		return (true);
-	if (std::stof(input) && input[input.length() - 1] == 'f')
-		return (true);
-	else
+	int	i = 0;
+	int count = 0;
+	while (input[i] != '\0')
+	{
+		if (input[i] == 'f')
+			count++;
+		i++;
+	}
+	if (count != 1)
 		return (false);
+	if (input[input.length() - 1] != 'f')
+		return (false);
+	try
+	{
+		float convertValue = std::stof(input);
+		if (convertValue != 0.0)
+			return (true);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+		return (false);
+	}
+	return (false);
 }
 
 /* stoi - if the conversion is successful, the function */
