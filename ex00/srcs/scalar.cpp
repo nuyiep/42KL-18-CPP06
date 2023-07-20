@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 12:47:32 by plau              #+#    #+#             */
-/*   Updated: 2023/07/19 21:06:30 by plau             ###   ########.fr       */
+/*   Updated: 2023/07/20 20:18:59 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,3 +217,72 @@ void	ScalarConverter::convert(std::string input)
 	}
 	throw std::runtime_error("Throw: Cannot be converted");
 }
+
+bool isConvertable(std::string& input) {
+	int dotCount = 0;
+	
+	if (input.length() == 1 && !isdigit(input[0]))
+		return true;
+	for (unsigned int i = 0; i < input.length(); ++i) {
+		if (!isdigit(input[i])) {
+			if (i == 0 && (input[i] == '+' || input[i] == '-'))
+				continue;
+			else if (i == input.length() - 1 && input[i] == 'f')
+				continue;
+			else if (input[i] == '.' && dotCount == 0)
+				dotCount++;
+			else
+				return false;
+		}
+	}
+	return true;
+}
+
+/* std::fixed - ensures that the float value is printed with */
+/* 				fixed-point notation */
+void	ScalarConverter::convert_xuerui(std::string input)
+{
+	double d;
+	int precision = 1;
+	
+	if (input.compare("nan") == 0)
+	{
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: nanf" << std::endl;
+		std::cout << "double: nan" << std::endl;
+		exit(4);
+	}
+	if (isConvertable(input)) {
+		if (input.length() == 1 && !isdigit(input[0]))
+			d = input[0];
+		else {
+			try {
+				d = std::stod(input);
+			} catch (...) {
+				throw std::runtime_error("Throw: Cannot be converted");
+			}
+		}
+		if (input.find('.') != std::string::npos) {
+			precision = input.length() - input.find('.') - 1;
+			if (input[input.length() - 1] == 'f') {
+				precision--;
+			}
+		}
+		if (precision < 1)
+			precision = 1;
+		if (d <= 32 || d >= 127)
+			std::cout << "char: " << "Unprintable" << std::endl;
+		else
+			std::cout << "char: " << static_cast<char>(d) << std::endl;
+		std::cout << "int: " << static_cast<int>(d) << std::endl;
+		std::cout << "float: " << std::fixed << std::setprecision(precision) << static_cast<float>(d) << 'f' << std::endl;
+		std::cout << "double: " << std::fixed << std::setprecision(precision) << static_cast<double>(d) << std::endl;
+	}
+	else {
+		throw std::runtime_error("Throw: Cannot be converted");
+	}
+	return;
+}
+
+

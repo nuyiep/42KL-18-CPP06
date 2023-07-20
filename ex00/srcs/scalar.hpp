@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 12:47:28 by plau              #+#    #+#             */
-/*   Updated: 2023/07/17 14:05:25 by plau             ###   ########.fr       */
+/*   Updated: 2023/07/20 20:14:09 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ class ScalarConverter
 		
 		/* Requred by PDF */
 		void		convert(std::string input);
+		void		convert_xuerui(std::string input);
 
 		/* Member function */
 		bool		isChar(std::string input);

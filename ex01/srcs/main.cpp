@@ -6,13 +6,14 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:43:38 by plau              #+#    #+#             */
-/*   Updated: 2023/07/18 12:14:28 by plau             ###   ########.fr       */
+/*   Updated: 2023/07/20 19:00:04 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"serializer.hpp"
 
 /* Same address because serializing and deserializing the same pointer */
+/* uintptr_t - unsigned integer type that is capable of storing a data pointer */
 int main()
 {
 	Data		A;

@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 22:46:46 by plau              #+#    #+#             */
-/*   Updated: 2023/07/19 21:52:12 by plau             ###   ########.fr       */
+/*   Updated: 2023/07/20 20:19:47 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,22 +83,24 @@ bool	ScalarConverter::isInt(std::string input)
 {
 	int	i;
 
-	i = 0;
-	while (input[i] != '\0')
+	i = -1;
+	while (input[++i] != '\0')
 	{
 		if (!isdigit(input[i]))
+		{
+			if (i == 0 && (input[i] == '+' || input[i] == '-'))
+				continue;
 			return (false);
-		i++;
+		}
 	}
 	try
 	{
-		if(std::stoi(input) || input == "0")
-			return (true);
+		std::stoi(input);
+		return (true);
 	}
-	catch(const std::exception& e)
+	catch(...)
 	{
-		std::cerr << "[isInt] Cannot be converted" << '\n';
-		exit(EXIT_FAILURE);
+		return (false);
 	}
 	return (false);
 }
