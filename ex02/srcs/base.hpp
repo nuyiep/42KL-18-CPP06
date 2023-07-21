@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 19:57:50 by plau              #+#    #+#             */
-/*   Updated: 2023/07/19 17:30:45 by plau             ###   ########.fr       */
+/*   Updated: 2023/07/20 20:59:44 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ class Base
 {
 	public:
 		virtual ~Base();
-		// virtual	void forDebug();
+		virtual	void forDebug();
 	private:
 };
 

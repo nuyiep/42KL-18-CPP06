@@ -50,6 +50,7 @@ This module is designed to help you understand the different casts in CPP.
 			//cast was successful
 			derivedPtr->foo();
 		}
+	- https://en.cppreference.com/w/cpp/language/dynamic_cast
   	- An example of the dynamic cast
    <img width="602" alt="Screenshot 2023-07-12 at 21 23 32" src="https://github.com/nuyiep/42KL-18-CPP06/assets/53002130/078a07c1-bd55-42b9-a521-15585ca68386">
 

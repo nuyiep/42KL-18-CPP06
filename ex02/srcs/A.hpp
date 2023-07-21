@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:00:54 by plau              #+#    #+#             */
-/*   Updated: 2023/07/19 17:30:29 by plau             ###   ########.fr       */
+/*   Updated: 2023/07/20 20:59:03 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 class A : public Base
 {
 	public:
-		// void	forDebug();
+		void	forDebug();
 
 	private:
 };

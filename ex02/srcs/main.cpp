@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 19:57:37 by plau              #+#    #+#             */
-/*   Updated: 2023/07/19 17:33:32 by plau             ###   ########.fr       */
+/*   Updated: 2023/07/20 20:59:41 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ Base* generate(void)
 	int	randomNum = (rand() % 3 + 1); // + 1 so that num range from 1-3 not 0-2
 	if (randomNum == 1)
 	{
-		Base* instance = new A;
+		Base* instance = new A; // A* instance = new A;
 		return (instance);
 	}
 	if (randomNum == 2)
@@ -102,7 +102,7 @@ int main()
 	instance = generate();
 	if (!instance)
 		std::cout << "upcasting failed" << std::endl;
-	// instance->forDebug();
+	instance->forDebug();
 	std::cout << BOLD_GREEN << "Testing for dynamic casting (pointer)" << RESET<< std::endl;
 	identify(instance);
 	std::cout << BOLD_GREEN << "Testing for dynamic casting (ref)" << RESET<< std::endl;
